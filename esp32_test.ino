@@ -3,7 +3,10 @@
 const char* ssid     = "your-ssid";
 const char* password = "your-password";
 
-const char* host = "arduino.cc";
+const char* host = "http://localhost";
+
+String dataNoGiliran = "";
+String dataOximeter = "";
 
 void setup()
 {
@@ -30,31 +33,35 @@ void setup()
     Serial.println(WiFi.localIP());
 }
 
-int value = 0;
 
 void loop()
-{
-    delay(5000);
-    ++value;
+{  
+  dataNoGiliran = "123456789";
 
+  int aaa = random(30, 100);
+  
+  dataOximeter = String(aaa);
+    
+  senddata (dataNoGiliran, dataOximeter);
+  delay (10000);
+}
+
+void senddata (String DataNG, String DataOM){
+  
     Serial.print("connecting to ");
     Serial.println(host);
-
-    // Use WiFiClient class to create TCP connections
     WiFiClient client;
     const int httpPort = 80;
     if (!client.connect(host, httpPort)) {
         Serial.println("connection failed");
         return;
     }
-
-    // We now create a URI for the request
-    String url = "/asciilogo.txt";
+    
+    String url = "/projectpoli/senddata.php?NoGiliran=123456789&Oximeter=50";
 
     Serial.print("Requesting URL: ");
     Serial.println(url);
 
-    // This will send the request to the server
     client.print(String("GET ") + url + " HTTP/1.1\r\n" +
                  "Host: " + host + "\r\n" +
                  "Connection: close\r\n\r\n");
@@ -67,7 +74,6 @@ void loop()
         }
     }
 
-    // Read all the lines of the reply from server and print them to Serial
     while(client.available()) {
         String line = client.readStringUntil('\r');
         Serial.print(line);
@@ -75,4 +81,4 @@ void loop()
 
     Serial.println();
     Serial.println("closing connection");
-}
+  }
