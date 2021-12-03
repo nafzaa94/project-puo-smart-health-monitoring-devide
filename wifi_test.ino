@@ -2,11 +2,11 @@
 #include <ESP8266HTTPClient.h>
 #include <WiFiClient.h>
 
-const char* ssid = "REPLACE_WITH_YOUR_SSID";
-const char* password = "REPLACE_WITH_YOUR_PASSWORD";
+const char* ssid = "ptriqstna";
+const char* password = "ptriqstna";
 
 //Your Domain name with URL path or IP address with path
-String serverName = "http://192.168.1.106:1880/update-sensor";
+String serverName = "http://172.100.11.143";
 
 // the following variables are unsigned longs because the time, measured in
 // milliseconds, will quickly become a bigger number than can be stored in an int.
@@ -40,7 +40,7 @@ void loop() {
       WiFiClient client;
       HTTPClient http;
 
-      String serverPath = serverName + "?temperature=24.37";
+      String serverPath = serverName + "/projectpoli/confirmcard.php?NoGiliran=671163113";
       
       // Your Domain name with URL path or IP address with path
       http.begin(client, serverPath.c_str());
