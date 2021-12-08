@@ -36,18 +36,20 @@ int pin1 = D5;
 int pin2 = D6;
 int pin3 = D8;
 
+
 int datapin1 = 0;
 int datapin2 = 0;
 int datapin3 = 0;
+int led = 10;
 
-const char* ssid = "Ptriqstna"; 
-const char* password = "puteriqistina";
+const char* ssid = "HP"; 
+const char* password = "nafza9494";
 
 String datanocard = "";
 String DataHeartRate = "";
 String DataSPO2 = "";
 
-String serverName = "http://172.20.10.3";
+String serverName = "http://192.168.43.228";
 
 String payload;
 
@@ -59,6 +61,7 @@ void setup() {
   pinMode (datapin1, INPUT);
   pinMode (datapin2, INPUT);
   pinMode (datapin3, INPUT);
+  pinMode (led, OUTPUT);
 
   WiFi.begin(ssid, password);
   Serial.println("Connecting");
@@ -99,10 +102,12 @@ void loop() {
     tag = "671163113";
     getreqnocard();
     if (tag == datanocard){
+      digitalWrite(led, HIGH);
       scanmax30100();
       delay(2000);
       getsenddata(datanocard, DataHeartRate, DataSPO2);
       tag = "";
+      digitalWrite(led, LOW);
       }
     }
 
@@ -110,10 +115,12 @@ void loop() {
     tag = "1911715722";
     getreqnocard();
     if (tag == datanocard){
+      digitalWrite(led, HIGH);
       scanmax30100();
       delay(2000);
       getsenddata(datanocard, DataHeartRate, DataSPO2);
       tag = "";
+      digitalWrite(led, LOW);
       }
     }
 
@@ -121,10 +128,12 @@ void loop() {
     tag = "21115314922";
     getreqnocard();
     if (tag == datanocard){
+      digitalWrite(led, HIGH);
       scanmax30100();
       delay(2000);
       getsenddata(datanocard, DataHeartRate, DataSPO2);
       tag = "";
+      digitalWrite(led, LOW);
       }
     }
 }
